@@ -9,7 +9,12 @@
  # 
  # ========================================== #>
 
-Test-NetConnection 192.168.1.1 -Port 22
-Test-NetConnection 192.168.1.1 -Port 80
-Test-NetConnection 192.168.1.1 -Port 139
-Test-NetConnection 192.168.1.1 -Port 443
+# Test-NetConnection 192.168.1.1 -Port 22
+# Test-NetConnection 192.168.1.1 -Port 80
+# Test-NetConnection 192.168.1.1 -Port 139
+# Test-NetConnection 192.168.1.1 -Port 443
+
+(22, 80, 139, 443) | ForEach-Object { 
+    $result = Test-NetConnection 192.168.1.1 -Port $_ 
+    "$($_): $($result.TcpTestSucceeded)"
+}
