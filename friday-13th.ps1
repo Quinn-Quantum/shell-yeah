@@ -7,4 +7,11 @@
  #
  # ========================================== #>
 
- 2022..2027 | ForEach-Object { "Fridays to stay in bed in " + $_ + "?" }
+#  2022..2027 | ForEach-Object { "Fridays to stay in bed in " + $_ + "?" }
+
+2022..2027 | ForEach-Object {$year = $_; Write-Output "Fridays to stay in bed in $year" ; 1..12 | ForEach-Object { $month = $_
+    $d = Get-Date -Year $year -Month $month -Day 13
+    if ($d.DayOfWeek -eq 'Friday') {
+        Write-Output " -> $($d.ToString('dd.MM.yyyy'))"} } }
+
+
